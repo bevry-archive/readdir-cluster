@@ -1,0 +1,26 @@
+# 9 September 2015
+# https://github.com/bevry/base
+
+# Use the latest travis infrastructure
+sudo: false
+
+# We use node
+language: node_js
+node_js:
+  - "0.12"
+  - "4"
+cache:
+  directories:
+    - node_modules
+
+# Prepare our tests
+# Ensure the project is setup correctly and compiled
+install: "npm run-script setup"
+before_script: "npm run-script compile"
+
+# Run our tests
+script: "npm test"
+
+# Custom notifications
+# travis encrypt --org "$SLACK_SUBDOMAIN:$SLACK_TRAVIS_TOKEN#updates" --add notifications.slack
+# travis encrypt --org "$TRAVIS_NOTIFICATION_EMAIL" --add notifications.email.recipients
