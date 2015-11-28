@@ -62,10 +62,7 @@
   },
   "dependencies": {
     "esnextguardian": "^1.1.0",
-    "fb-watchman": "^1.6.0",
-    "graceful-fs": "^4.1.2",
-    "safefs": "^4.0.0",
-    "taskgroup": "^4.3.0"
+    "graceful-fs": "^4.1.2"
   },
   "devDependencies": {
     "assert-helpers": "^4.0.1",

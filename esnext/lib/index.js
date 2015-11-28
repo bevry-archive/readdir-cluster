@@ -14,11 +14,8 @@ module.exports = function (directory, iterator, next) {
 	}
 	let _cursor = 0
 	function nextworker () {
-		if ( _cursor === cpus - 1 ) {
+		if ( ++_cursor === cpus ) {
 			_cursor = 0
-		}
-		else {
-			++_cursor
 		}
 		return workers[_cursor]
 	}
@@ -71,22 +68,14 @@ module.exports = function (directory, iterator, next) {
 		})
 	}
 
-	return new Promise(function (resolve, reject) {
-		return stat(directory).then(function (stat) {
-			if ( stat.directory ) {
-				readdir(directory).then(resolve).catch(reject)
-			}
-			else {
-				reject(new Error('path was not a directory, unable to readdir on it'))
-			}
+	readdir(directory)
+		.then(function () {
+			// console.log('MASTER passed')
+			close()
+			next()
+		}).catch(function (err) {
+			// console.log('MASTER failed', err)
+			close()
+			next(err)
 		})
-	}).then(function () {
-		// console.log('MASTER passed')
-		close()
-		next()
-	}).catch(function (err) {
-		// console.log('MASTER failed', err)
-		close()
-		next(err)
-	})
 }
