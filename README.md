@@ -46,18 +46,18 @@ Use multiple CPU cores via clusters for the fastest way to read nested directori
 
 ``` javascript
 const readdir = require('readdir-cluster')
-const items = []
+const paths = []
 
 function iterator (fullPath, relativePath, statObject) {
 	if ( statObject.directory && relativePath[0] === '.' ) {
 		return false  // do not delve deeper into hidden files
 	}
-	items.push(fullPath)
+	paths.push(fullPath)
 }
 
 readdir(__dirname, iterator, function (err) {
 	if (err)  throw err
-	console.log('completed successfully')
+	console.log('completed successfully:', paths)
 })
 ```
 
