@@ -50,7 +50,7 @@ const paths = []
 
 function iterator (fullPath, relativePath, statObject) {
 	if ( statObject.directory && relativePath[0] === '.' ) {
-		return false  // do not delve deeper into hidden files
+		return false  // do not delve deeper into hidden paths
 	}
 	paths.push(fullPath)
 }
