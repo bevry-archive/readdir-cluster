@@ -1,11 +1,11 @@
 'use strict'
 
 // Import
-const cluster = require('cluster')
 const pathUtil = require('path')
 
 // Export
 module.exports = function (directory, iterator, next) {
+	// Prepare
 	const cpus = require('os').cpus().length
 	const workers = []
 	const callbacks = {
@@ -20,27 +20,32 @@ module.exports = function (directory, iterator, next) {
 		return workers[_cursor]
 	}
 
-	// Spawn Workers
-	cluster.setupMaster({
-		exec: pathUtil.join(__dirname, 'worker.js')
-	})
-	for (let i = 0; i < cpus; i++) {
-		let worker = cluster.fork()
-		workers.push(worker)
-		worker.on('error', function (err) {
-			// console.log('MASTER', 'error from', process.pid, err)
-		})
-		worker.on('message', function (message) {
-			// console.log('master', 'message from', process.pid, message)
-			callbacks[message.action][message.path](message.error, message.data)
-		})
+	// Workers
+	// function handleError (err) {
+	// 	// console.log('MASTER', 'error from', process.pid, err)
+	// }
+	function handleMessage (message) {
+		// console.log('master', 'message from', process.pid, message)
+		callbacks[message.action][message.path](message.error, message.data)
 	}
-	const close = function () {
+	function openWorkers () {
+		const cluster = require('cluster')
+		cluster.setupMaster({
+			exec: pathUtil.join(__dirname, 'worker.js')
+		})
+		for (let i = 0; i < cpus; i++) {
+			let worker = cluster.fork()
+			workers.push(worker)
+			// worker.on('error', handleError)
+			worker.on('message', handleMessage)
+		}
+	}
+	function closeWorkers () {
 		workers.forEach((worker) => worker.disconnect())
 	}
 
-	//
-	const stat = function (file) {
+	// Actions
+	function stat (file) {
 		return new Promise(function (resolve, reject) {
 			callbacks.stat[file] = function (err, data) {
 				if (err)  return reject(err)
@@ -49,7 +54,7 @@ module.exports = function (directory, iterator, next) {
 			nextworker().send({action: 'stat', path: file})
 		})
 	}
-	const readdir = function (directory) {
+	function readdir (directory) {
 		return new Promise(function (resolve, reject) {
 			callbacks.readdir[directory] = function (err, files) {
 				if (err)  return reject(err)
@@ -68,14 +73,16 @@ module.exports = function (directory, iterator, next) {
 		})
 	}
 
+	// Start
+	openWorkers()
 	readdir(directory)
 		.then(function () {
 			// console.log('MASTER passed')
-			close()
+			closeWorkers()
 			next()
 		}).catch(function (err) {
 			// console.log('MASTER failed', err)
-			close()
+			closeWorkers()
 			next(err)
 		})
 }

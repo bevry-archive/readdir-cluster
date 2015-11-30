@@ -1,4 +1,4 @@
-const fsUtil = require('graceful-fs')
+const fsUtil = require('fs')
 process.on('message', function (message) {
 	// console.log('WORKER:', process.pid, message)
 	if ( message.action === 'readdir' ) {

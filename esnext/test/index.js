@@ -1,20 +1,27 @@
 // Import
 const joe = require('joe')
-const lib = require('../..')
+const readdir = require('../..')
+const assert = require('assert-helpers')
+
+// Prepare
+const path = require('path').join(__dirname, '..', '..', 'esnext')
 
 // Test
-joe.suite('directory-overseer', function (suite, test) {
-	test('avatars', function (done) {
-		const iterator = function (fpath, rpath, stat) {
-			console.log('FILE:', fpath)
-			if ( rpath[0] === '.' ) {
+joe.suite('readdir-cluster', function (suite, test) {
+	test('works on esnext directory with test filter', function (done) {
+		const actualPaths = []
+		const expectedPaths = ['lib', 'index.js', 'worker.js'].sort()
+		function iterator (fpath, rpath, stat) {
+			if ( stat.directory && rpath === 'test' ) {
 				return false
 			}
+			actualPaths.push(rpath)
 		}
-		const complete = function (err) {
-			console.log('ALL DONE', err)
+		function complete (err) {
+			if (err)  return done(err)
+			assert.deepEqual(actualPaths.sort(), expectedPaths, 'paths were as expected')
 			done(err)
 		}
-		lib('/Users/balupton/Documents', iterator, complete)
+		readdir(path, iterator, complete)
 	})
 })
