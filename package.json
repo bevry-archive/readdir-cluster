@@ -1,7 +1,7 @@
 {
   "title": "readdir-cluster",
   "name": "readdir-cluster",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use multiple CPU cores via clusters for the fastest way to read nested directories and their stats",
   "homepage": "https://github.com/bevry/readdir-cluster",
   "license": "MIT",
@@ -47,10 +47,10 @@
   },
   "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/readdir-cluster/issues"
@@ -69,7 +69,6 @@
   "devDependencies": {
     "assert-helpers": "^4.0.1",
     "babel-cli": "^6.2.0",
-    "babel-eslint": "^5.0.0-beta2",
     "babel-preset-es2015": "^6.1.18",
     "eslint": "^1.10.2",
     "joe": "^1.6.0",

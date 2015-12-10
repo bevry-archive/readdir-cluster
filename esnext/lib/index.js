@@ -34,7 +34,7 @@ module.exports = function (directory, iterator, next) {
 			exec: pathUtil.join(__dirname, 'worker.js')
 		})
 		for (let i = 0; i < cpus; i++) {
-			let worker = cluster.fork()
+			const worker = cluster.fork()
 			workers.push(worker)
 			// worker.on('error', handleError)
 			worker.on('message', handleMessage)

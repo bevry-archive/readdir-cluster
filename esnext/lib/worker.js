@@ -1,4 +1,9 @@
+'use strict'
+
+// Import
 const fsUtil = require('fs')
+
+// Handle incoming work
 process.on('message', function (message) {
 	// console.log('WORKER:', process.pid, message)
 	if ( message.action === 'readdir' ) {
