@@ -1,18 +1,16 @@
-'use strict'
-
 // Import
 const joe = require('joe')
-const readdir = require('../..')
+const readdir = require('../')
 const assert = require('assert-helpers')
 
 // Prepare
-const path = require('path').join(__dirname, '..', '..', 'esnext')
+const path = __dirname
 
 // Test
 joe.suite('readdir-cluster', function (suite, test) {
-	test('works on esnext directory with test filter', function (done) {
+	test('works on source directory with test filter', function (done) {
 		const actualPaths = []
-		const expectedPaths = ['lib', 'index.js', 'worker.js'].sort()
+		const expectedPaths = ['index.js', 'test.js', 'worker.js'].sort()
 		function iterator (fpath, rpath, stat) {
 			if ( stat.directory && rpath === 'test' ) {
 				return false

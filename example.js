@@ -1,5 +1,5 @@
 var path = __dirname
-if ( process.argv.indexOf('cluster') !== -1 ) {
+if ( process.argv.indexOf('old') === -1 ) {
 	console.log('using cluster method')
 	require('./')(path, console.log, console.log)
 }
