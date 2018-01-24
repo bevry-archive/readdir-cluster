@@ -1,3 +1,5 @@
+'use strict'
+
 // Import
 const joe = require('joe')
 const readdir = require('../')
@@ -12,13 +14,13 @@ joe.suite('readdir-cluster', function (suite, test) {
 		const actualPaths = []
 		const expectedPaths = ['index.js', 'test.js', 'worker.js'].sort()
 		function iterator (fpath, rpath, stat) {
-			if ( stat.directory && rpath === 'test' ) {
+			if (stat.directory && rpath === 'test') {
 				return false
 			}
 			actualPaths.push(rpath)
 		}
 		function complete (err) {
-			if (err)  return done(err)
+			if (err) return done(err)
 			assert.deepEqual(actualPaths.sort(), expectedPaths, 'paths were as expected')
 			done(err)
 		}

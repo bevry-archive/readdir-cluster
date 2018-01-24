@@ -1,32 +1,32 @@
-# 2016 April 27
-# https://github.com/bevry/base
-
-# Use the latest travis infrastructure
 sudo: false
-
-# We use node
 language: node_js
 node_js:
-  - "0.12"
-  - "4"
-  - "5"
-  - "6"
+- '0.8'
+- '0.10'
+- '0.12'
+- '4'
+- '6'
+- '8'
+- '9'
+matrix:
+  fast_finish: true
+  allow_failures:
+  - node_js: '0.8'
+  - node_js: '0.10'
+  - node_js: '9'
 cache:
   directories:
-    - node_modules
-
-# Prepare our tests
-# Ensure the project is setup correctly and compiled
-install: "npm run-script setup"
-before_script: "npm run-script compile"
-
-# Run our tests
-script: "npm test"
-
-# Custom notifications
+  - "$HOME/.npm"
+  - "$HOME/.yarn-cache"
+install:
+- eval "$(curl -s https://raw.githubusercontent.com/bevry/awesome-travis/ef794235b7094de5e49fb64e226da032ce135ecd/scripts/node-install.bash)"
+before_script:
+- eval "$(curl -s https://raw.githubusercontent.com/bevry/awesome-travis/ef794235b7094de5e49fb64e226da032ce135ecd/scripts/node-verify.bash)"
+after_success:
+- eval "$(curl -s https://raw.githubusercontent.com/bevry/awesome-travis/ef794235b7094de5e49fb64e226da032ce135ecd/scripts/node-publish.bash)"
 notifications:
   slack:
-    secure: Jp7fAaSGoTZzkXviM7gAElYDKgj2SENQtGt3yYllQsmuYREk2TdhdUWwZxei7wdjI8SWeURdAVXZBuvEOkltqKGarcpJZrCT4AfCvL20HwSvP+F0XASit+PeiRpiW625fYg6JPd0FGmh+n4KubMv9ntu9yxxqH9/x110Myq27t1a1xmNKF+Wvq7KEaV6qlR33/j/9U+V8pt+/YS7uKL5XiojvG9JL3BJYGLeMnOScPdvFgzvTtnjWDZDMVugfYxOrs4wxvpNAS6LED8Wd7PWlyAGIz1rsx/VxKgfNo+qCXclbxuX+eOw1U8Z0Mkk9XJEfmjnfpKFelUaCSwjUHQeVrXX+svzjZ4oHVOxY3nAfKCaVqqAWji1tkrZ1HmFOb7euXjmY2cU1zlK3JB0bEqU7poxMY8Kq8ZGOlMLcIRGi97PTwLGSnlOKHWdCktub6i0zk4cravKaKVwJZ2z5OJcH96JQNMq1cT2zJ3ArPL9tuiGgEfzLahyRUshf2+I0Sm67WjfHa92kiFYI7Qjv6PkVJvTvJLHO5OVAZQFyVRYznhs5LAgOaxRB0vbZTkZ7rNH9KHNRQRwadTaDdbsyzSbPGt4R579zwQBzw/sM1q20BZ7cZyO23T6W5ycndRL+i5uxUenqhyAbCRZ6uL7SXp0Pqjz/cS8UNhn/wcYanPjD7E=
+    secure: C5Af0zalswoixwk6rW743T93ImTFkwt8aB847l+jD0QlTmQA6ETm4pVcoZIL8FgSJJl/bJHvoIfGG35+WEDuS7sR/7w1gevpjxOjgTpq5ixN0LW82i0e33X+udTvjJrLXeBHmyPrJ6/+TqGzvXuA63Cx7mZs+MP4MluNv/flu4a+mWqQ2CyljhF1/g1E9T0rhdJr+BKyosmyEqlHb0pyrnTQ5c8GTnwIUE7kwBnaNL48ffzfA5Ujf9D5hmMKoJcZNcrFviGcdircgTjtELWqX72G1/Ds+KHLYSVXJA/O8/tkUfZ+hTv4ZFbih2EY7mLqCreKMMzCwemfNGYroHffnkVPSuyGAzxvR32J6Eli0HAnCAq4lcChs2a6QE9Pm8d749WcpWXxBTCEW5Wi7D+l4TEXqN/ZM47bHMhoRmkAiejnQcfMvfzTH1jolFAcjjJIfMJf4ptkzVF6EY5WpolfwqRI/HxFlQow+AgqY10GzyTqvyxHybVtkGOaSkG167RKTxgSkhAUVGs6ndqSHwYR38egXBU/K1VP7A94unjNNOnn7jelRzh7rBzWQgE/JC6MJfVIxUAHOwVryIpGb3bdQUuU+IawnGa9RBvljx6fXA3QZRZ0SZUJ5DUxUO+Oi3fA8YwSJU6swXvq/aBrIvBtBVbzo+3iVGkLw5E7WGgA+NM=
   email:
     recipients:
-      secure: pi7TX4ysX+mJ+pwhQcGVslA/g4a0DBrYCQ8cKtXbQR22fMOrmXU7hxHEOqafOwfhjBDgNC+aOpetw7HqwBYLG9chxAnQhFnVc43w2GA2VIFafWMhsDZD8ofXrjNmbVmbgug9XUgNIosu/I0DITD1w9bF65vKLUJH8QJoFRxOmhFhTVbjMcM2ypG0Pm1WPdQFwIkBDDOntzlBl6nHoGLSnWnLYWNR4dPnzoUFeRVytgSilXtLfDwZp1KEUabyZH7V4qzvWjjk3C1JjRK7gMWmtledVRKoHtEH32l3GSQcdwOI4YUVtIaJESei4xURKuLPgf5WcUZZ6JKNYL55RjDYjf+4zagapoXOzRwFLqksSfE99jYGtxuxxtoepqBFX115xmKWfkDRWRaCGjjQYRFyu0R54+UmVkM1QIoWuhBE7+YusqpB71AZloH0X2aKXM6BQuefMejZaQ4mNzDCY0MNaEjm9eP97lSKC/jMasjso/5BOA4+G9hTZA9dg/sTQXZ4dKtOF2313ytvsnZccIbBJdFPjcnv8x1MSHtJyzS5areHhdHQFZxK6YVa9Z8eFp1zD4CzfnES604by/GvrH8cfnrT1ANO4H1U4pn3iurIrxlOc1f66W8J/KKED6SEMjCJhhicmSAlQmS4agTULpjpbYWn/eeoDfzzokKIz2QeDQA=
+      secure: jD5IO+8MuhvfJodD1bT9+DR8yzI5yBVZlivrhwT/AgbpxrPOGOEdHWOa8+WhWIFjpmFI0Y/84cWx+GKdjcgYQIpf3KsijuWf+tOhkuvO4rKITdkoQHcN7Se3x3SBKMnUs26Z5qz1U0e64bdMl2mxnHhq7yVEZESu4HhWh/WWTAZadP/Y/xya8nQJcR2DHmuonxStzTTY5NnXK2e+6ucL9xXBp5gfvQGfJNV+V7rxMZDQSZQI97fncu2ulflqpFr7TsvYBckPB9IQAj7hozafZ7t3P+67flKD//QmoA71j9diob6mjztvvL7ycGrz2zcMvUE20WK62cFaMwGm3vaoqaORQSuFA+o8u89kSK83DSgaTWRIRJOofrpbACCBRwh9dhfWOcJV+qtFJyxzFuZvhcszujaTTqhRzPvShBUYQ4vlgTwILsOtYE7FCH/wINsunFFe6rmfC9wd7ir9yDbU0Y+UgW3Sq97GWkE+pGhD+hKpr6y9eabz8o1anaQ7OzbIHmxlJz+b5PVcWVeu/MmGLhtcUSFqNpbX2pecwsfw3IH/IjWL7USMRusDYkv7G3zUoRTiDSlOANuiHGfJiWTwrbSe30TZic8eC9DxqHjC9EH7q4PQeeydwynA1E5cQ7n6+0YhXjFBD8M3xevrqDK3xdCITX2j5t1PzqaG9Rqjzok=

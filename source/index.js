@@ -1,3 +1,5 @@
+'use strict'
+
 // Import
 const pathUtil = require('path')
 
@@ -12,7 +14,7 @@ module.exports = function (directory, iterator, next) {
 	}
 	let _cursor = 0
 	function nextworker () {
-		if ( ++_cursor === cpus ) {
+		if (++_cursor === cpus) {
 			_cursor = 0
 		}
 		return workers[_cursor]
@@ -46,28 +48,28 @@ module.exports = function (directory, iterator, next) {
 	function stat (file) {
 		return new Promise(function (resolve, reject) {
 			callbacks.stat[file] = function (err, data) {
-				if (err)  return reject(err)
+				if (err) return reject(err)
 				return resolve(data)
 			}
-			nextworker().send({action: 'stat', path: file})
+			nextworker().send({ action: 'stat', path: file })
 		})
 	}
 	function readdir (directory) {
 		return new Promise(function (resolve, reject) {
 			callbacks.readdir[directory] = function (err, files) {
-				if (err)  return reject(err)
+				if (err) return reject(err)
 				Promise.all(
 					files.map((file) => {
 						const path = pathUtil.join(directory, file)
 						return stat(path).then(function (stat) {
-							if ( iterator(path, file, stat) !== false && stat.directory ) {
+							if (iterator(path, file, stat) !== false && stat.directory) {
 								return readdir(path)
 							}
 						})
 					})
 				).then(resolve).catch(reject)
 			}
-			nextworker().send({action: 'readdir', path: directory})
+			nextworker().send({ action: 'readdir', path: directory })
 		})
 	}
 
