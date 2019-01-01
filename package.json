@@ -1,7 +1,7 @@
 {
   "title": "readdir-cluster",
   "name": "readdir-cluster",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Use multiple CPU cores via clusters for the fastest way to read nested directories and their stats",
   "homepage": "https://github.com/bevry/readdir-cluster",
   "license": "MIT",
