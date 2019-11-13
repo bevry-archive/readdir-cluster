@@ -2,7 +2,7 @@
 
 // Import
 const kava = require('kava')
-const readdir = require('../')
+const readdir = require('./')
 const assert = require('assert-helpers')
 
 // Prepare
