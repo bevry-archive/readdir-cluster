@@ -1,13 +1,9 @@
 sudo: false
 language: node_js
 node_js:
-- '0.12'
-- '4'
-- '6'
 - '8'
 - '10'
 - '12'
-- '13'
 matrix:
   fast_finish: true
   allow_failures: []
@@ -21,4 +17,4 @@ after_success:
 notifications:
   email:
     recipients:
-      secure: reoW4sGjcP/TmDGjV8mtvKZeQyuqr302ifclhs02Af3n993sEpUDvoiKBGMLKJD37PEYmE1vbOoHIw7lrkkTYKlrB576XbZX2yyXoyryw+wAhLtqYh/jMJt87+LeZCtegQv4L/yHVMxGo+ZtO684B7s3G7eMxxOku68du3RotVHHqxKu6UJsAkmDXPn7kR/d06FwNH7X1noAXuvJZ+qYdsHDz0wPrJVABaNLXAwtWVpYTRv6iAIlUQzuI+4jB5VUurC1E5AXD6Lf4vvfxpJP1Yoot9TXUXhGHluWwMrpVNiZjiWSfMADg6qlsDZKHXDlStJnhsergUrVeVuJu5oieiOlNSYoL7Oa2/Z7njYST/kp4+4pEfD0AdGVoC/5eibO0rKDOU/3AaOVtwRsgv+OLI4cwocJEo9Eioi3GpctkUQ0dPhsKz7yruugO7VRv3mVzrO20qorKJ/rxMJv1bmy0HmDpSsSgAmPIiB5KWFTweI2ydnb/pG+J/vUz4LEdXMW+WEudXm4CCfdDkwntBOOyegPXbz9CuJYdb97+Tk77WuexMhloeGowOYEJFjGEQ2F4hii3ewUIjCWxlhIyTDtkFXDPxOorD+pCiBI3I69jVc2A7LP7C4g5e++0F6Bkqympso079aJnYh55fANCLqYEqBq+rV3S/4cRdxg0fn77KM=
+      secure: DukjQF33X0U5uFlju3UfUFfDmHosF5xiu5bA9vrm0CSs/nuxDKcDdPbPSg8wwhmmt0rd9YdSHGk0Acu+RqqE3i9mMiidNmIGyYEoMnS92+4Ghp6ZzBrwHUbJtI8scbHLIbdYwY0FFhxQ+VKE+Tv41xIVON0nbMWU7D7RqhXrTmUzmlqCr2Er7O1j+wP4FBND5W7XBI56nSO5yJhwG7NIcFU7ZXZf3sncbNgFpbbYXZh4HsSa++7Ct1/qOkfy8pm74ehZqFzC9aDYal7ImHFxPwMg+W+N2VYTGBpWw6PzDxgLEt+0SJLtFoiOD6m/uaITPnWOPELWX0x8qqnhWqnz6MHp0/spDdUbV9XjIibjRoVx6pRqq2jyIpCkJuzM41hhMkTssJh0kFeuDTFqCfGXTct2doIZMVzXbviCpf5SoPAJMKEnL2NR2FkGIulGOz116JAj/PtcIeT1wuYegjXrrBga09zAtOEMslszIgvyp4bkUFpSZ9EmiyH72CKl+hn8akFRaCJFL8ZTbjXPWg+D9/VfVtPZAJnOomEkXsZCwsCewCXBKHUXCVOWNBJpXuWzmjVa0rkGA7ijOz6enDZHjt6yCHtqnxJcoFlX8wwQumIFwbBSbjEY08xp4RmIsTu35KuqSLnavBMOSa18Ef1pMNTolmdgujNcnQIvg2JcJQI=
