@@ -1,7 +1,7 @@
 {
   "title": "readdir-cluster",
   "name": "readdir-cluster",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Use multiple CPU cores via clusters for the fastest way to read nested directories and their stats",
   "homepage": "https://github.com/bevry/readdir-cluster",
   "license": "MIT",
@@ -84,15 +84,15 @@
   ],
   "main": "source/index.js",
   "devDependencies": {
-    "assert-helpers": "5.4.0",
-    "eslint": "^6.6.0",
-    "eslint-config-bevry": "^1.3.0",
-    "eslint-config-prettier": "^6.6.0",
+    "assert-helpers": "^5.6.0",
+    "eslint": "^6.7.2",
+    "eslint-config-bevry": "^2.1.0",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "kava": "4.1.0",
+    "kava": "^4.2.0",
     "prettier": "^1.19.1",
-    "projectz": "^1.10.0",
-    "valid-directory": "^1.1.1"
+    "projectz": "^1.12.0",
+    "valid-directory": "^1.3.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
