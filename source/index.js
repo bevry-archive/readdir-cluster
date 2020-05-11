@@ -4,13 +4,13 @@
 const pathUtil = require('path')
 
 // Export
-module.exports = function(directory, iterator, next) {
+module.exports = function (directory, iterator, next) {
 	// Prepare
 	const cpus = require('os').cpus().length
 	const workers = []
 	const callbacks = {
 		stat: {},
-		readdir: {}
+		readdir: {},
 	}
 	let _cursor = 0
 	function nextworker() {
@@ -31,7 +31,7 @@ module.exports = function(directory, iterator, next) {
 	function openWorkers() {
 		const cluster = require('cluster')
 		cluster.setupMaster({
-			exec: pathUtil.join(__dirname, 'worker.js')
+			exec: pathUtil.join(__dirname, 'worker.js'),
 		})
 		for (let i = 0; i < cpus; i++) {
 			const worker = cluster.fork()
@@ -41,13 +41,13 @@ module.exports = function(directory, iterator, next) {
 		}
 	}
 	function closeWorkers() {
-		workers.forEach(worker => worker.disconnect())
+		workers.forEach((worker) => worker.disconnect())
 	}
 
 	// Actions
 	function stat(file) {
-		return new Promise(function(resolve, reject) {
-			callbacks.stat[file] = function(err, data) {
+		return new Promise(function (resolve, reject) {
+			callbacks.stat[file] = function (err, data) {
 				if (err) return reject(err)
 				return resolve(data)
 			}
@@ -55,13 +55,13 @@ module.exports = function(directory, iterator, next) {
 		})
 	}
 	function readdir(directory) {
-		return new Promise(function(resolve, reject) {
-			callbacks.readdir[directory] = function(err, files) {
+		return new Promise(function (resolve, reject) {
+			callbacks.readdir[directory] = function (err, files) {
 				if (err) return reject(err)
 				Promise.all(
-					files.map(file => {
+					files.map((file) => {
 						const path = pathUtil.join(directory, file)
-						return stat(path).then(function(stat) {
+						return stat(path).then(function (stat) {
 							if (iterator(path, file, stat) !== false && stat.directory) {
 								return readdir(path)
 							}
@@ -78,12 +78,12 @@ module.exports = function(directory, iterator, next) {
 	// Start
 	openWorkers()
 	readdir(directory)
-		.then(function() {
+		.then(function () {
 			// console.log('MASTER passed')
 			closeWorkers()
 			next()
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			// console.log('MASTER failed', err)
 			closeWorkers()
 			next(err)

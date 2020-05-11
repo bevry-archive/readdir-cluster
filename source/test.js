@@ -9,8 +9,8 @@ const assert = require('assert-helpers')
 const path = __dirname
 
 // Test
-kava.suite('readdir-cluster', function(suite, test) {
-	test('works on source directory with test filter', function(done) {
+kava.suite('readdir-cluster', function (suite, test) {
+	test('works on source directory with test filter', function (done) {
 		const actualPaths = []
 		const expectedPaths = ['index.js', 'test.js', 'worker.js'].sort()
 		function iterator(fpath, rpath, stat) {

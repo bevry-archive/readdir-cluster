@@ -33,6 +33,25 @@ Use multiple CPU cores via clusters for the fastest way to read nested directori
 <!-- /DESCRIPTION -->
 
 
+## Usage
+
+```javascript
+const readdir = require('readdir-cluster')
+const paths = []
+
+function iterator(fullPath, relativePath, statObject) {
+    if (statObject.directory && relativePath[0] === '.') {
+        return false // do not delve deeper into hidden paths
+    }
+    paths.push(fullPath)
+}
+
+readdir(__dirname, iterator, function (err) {
+    if (err) throw err
+    console.log('completed successfully:', paths)
+})
+```
+
 <!-- INSTALL/ -->
 
 <h2>Install</h2>
@@ -40,7 +59,8 @@ Use multiple CPU cores via clusters for the fastest way to read nested directori
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
 <ul>
 <li>Install: <code>npm install --save readdir-cluster</code></li>
-<li>Require: <code>require('readdir-cluster')</code></li>
+<li>Import: <code>import * as pkg from ('readdir-cluster')</code></li>
+<li>Require: <code>const pkg = require('readdir-cluster')</code></li>
 </ul>
 
 <h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
@@ -48,31 +68,9 @@ Use multiple CPU cores via clusters for the fastest way to read nested directori
 <p>This package is published with the following editions:</p>
 
 <ul><li><code>readdir-cluster</code> aliases <code>readdir-cluster/source/index.js</code></li>
-<li><code>readdir-cluster/source/index.js</code> is esnext source code with require for modules</li></ul>
-
-<p>Environments older than Node.js v8 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
+<li><code>readdir-cluster/source/index.js</code> is <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> source code for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li></ul>
 
 <!-- /INSTALL -->
-
-
-## Usage
-
-``` javascript
-const readdir = require('readdir-cluster')
-const paths = []
-
-function iterator (fullPath, relativePath, statObject) {
-	if ( statObject.directory && relativePath[0] === '.' ) {
-		return false  // do not delve deeper into hidden paths
-	}
-	paths.push(fullPath)
-}
-
-readdir(__dirname, iterator, function (err) {
-	if (err)  throw err
-	console.log('completed successfully:', paths)
-})
-```
 
 
 <!-- HISTORY/ -->
@@ -101,7 +99,7 @@ readdir(__dirname, iterator, function (err) {
 
 These amazing people are maintaining this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/readdir-cluster/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster">view contributions</a></li></ul>
+<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/readdir-cluster/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster">view contributions</a></li></ul>
 
 <h3>Sponsors</h3>
 
@@ -121,8 +119,7 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/readdir-cluster/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster">view contributions</a></li>
-<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/readdir-cluster/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/readdir-cluster">view contributions</a></li></ul>
+<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/readdir-cluster/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/readdir-cluster/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
