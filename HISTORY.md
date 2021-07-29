@@ -1,5 +1,9 @@
 # History
 
+## v3.17.0 2021 July 30
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v3.16.0 2021 July 29
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
