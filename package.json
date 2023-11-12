@@ -94,7 +94,7 @@
   "main": "source/index.js",
   "devDependencies": {
     "@bevry/update-contributors": "^1.22.0",
-    "assert-helpers": "^8.4.0",
+    "assert-helpers": "^9.0.0",
     "eslint": "^8.52.0",
     "eslint-config-bevry": "^3.28.0",
     "eslint-config-prettier": "^9.0.0",
