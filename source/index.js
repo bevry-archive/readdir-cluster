@@ -66,7 +66,7 @@ module.exports = function (directory, iterator, next) {
 								return readdir(path)
 							}
 						})
-					}),
+					})
 				)
 					.then(resolve)
 					.catch(reject)

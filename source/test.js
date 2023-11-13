@@ -24,7 +24,7 @@ kava.suite('readdir-cluster', function (suite, test) {
 			assert.deepEqual(
 				actualPaths.sort(),
 				expectedPaths,
-				'paths were as expected',
+				'paths were as expected'
 			)
 			done(err)
 		}
