@@ -1,7 +1,7 @@
 {
   "title": "readdir-cluster",
   "name": "readdir-cluster",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Use multiple CPU cores via clusters for the fastest way to read nested directories and their stats",
   "homepage": "https://github.com/bevry/readdir-cluster",
   "license": "Artistic-2.0",
@@ -30,18 +30,19 @@
       "githubsponsors",
       "thanksdev",
       "patreon",
-      "flattr",
       "liberapay",
       "buymeacoffee",
       "opencollective",
       "crypto",
       "paypal",
-      "wishlist"
+      "---",
+      "discord",
+      "twitch"
     ],
     "config": {
       "githubWorkflow": "bevry",
       "githubSponsorsUsername": "balupton",
-      "thanksdevGithubUsername": "balupton",
+      "thanksdevGithubUsername": "bevry",
       "buymeacoffeeUsername": "balupton",
       "cryptoURL": "https://bevry.me/crypto",
       "flattrUsername": "balupton",
@@ -50,6 +51,9 @@
       "patreonUsername": "bevry",
       "paypalURL": "https://bevry.me/paypal",
       "wishlistURL": "https://bevry.me/wishlist",
+      "discordServerID": "1147436445783560193",
+      "discordServerInvite": "nQuXddV7VP",
+      "twitchUsername": "balupton",
       "githubUsername": "bevry",
       "githubRepository": "readdir-cluster",
       "githubSlug": "bevry/readdir-cluster",
@@ -94,15 +98,15 @@
   "main": "source/index.js",
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
-    "assert-helpers": "^11.4.0",
-    "eslint": "^8.53.0",
-    "eslint-config-bevry": "^4.0.0",
+    "assert-helpers": "^11.5.0",
+    "eslint": "^8.54.0",
+    "eslint-config-bevry": "^5.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "kava": "^7.2.0",
+    "kava": "^7.3.0",
     "prettier": "^3.1.0",
-    "projectz": "^3.0.0",
-    "valid-directory": "^4.2.0"
+    "projectz": "^3.2.0",
+    "valid-directory": "^4.4.0"
   },
   "scripts": {
     "our:clean": "rm -rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
