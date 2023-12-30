@@ -30,7 +30,6 @@ Create a cluster of workers to iterate through the filesystem
 
 <!-- /DESCRIPTION -->
 
-
 ## Usage
 
 [Complete API Documentation.](http://master.readdir-cluster.bevry.surge.sh/docs/)
@@ -51,6 +50,8 @@ console.log(paths)
 ```
 
 ### Performance
+
+Benchmarks:
 
 -   Running `readdir-cluster .` returns 7388 files in 500ms
 -   Running [`readdir`](https://nodejs.org/api/fs.html#fsreaddirpath-options-callback) with `recursive: true` returns 7388 files in 100ms
@@ -73,13 +74,20 @@ console.log(paths)
     })
     ```
 
-As such, you should probably use `readdir` with `recursive: true` or `fdir` instead. As for why this package exists, readdir-cluster was created in 2005, recursive was added to Node.js in 2023, and fdir was created in 2020. That said, there are [several issues](https://github.com/bevry/readdir-cluster/issues) that could potentially improve readdir-cluster performance.
+Recommendations:
+
+-   if you target Node.js 18.7 and above, you should use [`fs.readdir`](https://nodejs.org/api/fs.html#fsreaddirpath-options-callback) with `recursive: true`
+-   if you target older Node.js versions, you should use [`@bevry/fs-list`](https://github.com/bevry/fs-list) which uses `fs-readdir` if available otherwise uses the `find` executable which is even more performant (60ms instead of 100ms)
+-   if you target older Node.js versions and you want a stat object, use `readdir-cluster`
+-   if you target Nodejs 12 and above, and want a lot of customisation, use [fdir](https://github.com/thecodrr/fdir)
+
+As for why this package exists, `readdir-cluster` was created in 2005, `recursive` was added to Node.js in 2023, and `fdir` was created in 2020. That said, there are [several issues](https://github.com/bevry/readdir-cluster/issues) that could potentially improve `readdir-cluster` performance.
 
 <!-- INSTALL/ -->
 
 ## Install
 
-### [npm](https://npmjs.com "npm is a package manager for javascript")
+### [npm](https://npmjs.com 'npm is a package manager for javascript')
 
 #### Install Globally
 
@@ -93,17 +101,18 @@ As such, you should probably use `readdir` with `recursive: true` or `fdir` inst
 -   Import: `import pkg from ('readdir-cluster')`
 -   Require: `const pkg = require('readdir-cluster').default`
 
-### [Editions](https://editions.bevry.me "Editions are the best way to produce and consume packages you care about.")
+### [Editions](https://editions.bevry.me 'Editions are the best way to produce and consume packages you care about.')
 
 This package is published with the following editions:
--   `readdir-cluster` aliases `readdir-cluster/index.cjs` which uses the [Editions Autoloader](https://github.com/bevry/editions "You can use the Editions Autoloader to autoload the appropriate edition for your consumers environment") to automatically select the correct edition for the consumer's environment
--   `readdir-cluster/source/index.ts` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") source code with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
--   `readdir-cluster/edition-es2022/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2022](https://en.wikipedia.org/wiki/ES2022 "ECMAScript 2022") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
--   `readdir-cluster/edition-es2017/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2017](https://en.wikipedia.org/wiki/ES2017 "ECMAScript 2017") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
--   `readdir-cluster/edition-es2015/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2015](https://babeljs.io/docs/en/learn#ecmascript-2015-features "ECMAScript 2015") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
--   `readdir-cluster/edition-es5/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against ES5 for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
--   `readdir-cluster/edition-es2017-esm/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2017](https://en.wikipedia.org/wiki/ES2017 "ECMAScript 2017") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 12 || 14 || 16 || 18 || 20 || 21 with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
--   `readdir-cluster/edition-types/index.d.ts` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled Types with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
+
+-   `readdir-cluster` aliases `readdir-cluster/index.cjs` which uses the [Editions Autoloader](https://github.com/bevry/editions 'You can use the Editions Autoloader to autoload the appropriate edition for your consumers environment') to automatically select the correct edition for the consumer's environment
+-   `readdir-cluster/source/index.ts` is [TypeScript](https://www.typescriptlang.org/ 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.') source code with [Import](https://babeljs.io/docs/learn-es2015/#modules 'ECMAScript Modules') for modules
+-   `readdir-cluster/edition-es2022/index.js` is [TypeScript](https://www.typescriptlang.org/ 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.') compiled against [ES2022](https://en.wikipedia.org/wiki/ES2022 'ECMAScript 2022') for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html 'Node/CJS Modules') for modules
+-   `readdir-cluster/edition-es2017/index.js` is [TypeScript](https://www.typescriptlang.org/ 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.') compiled against [ES2017](https://en.wikipedia.org/wiki/ES2017 'ECMAScript 2017') for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html 'Node/CJS Modules') for modules
+-   `readdir-cluster/edition-es2015/index.js` is [TypeScript](https://www.typescriptlang.org/ 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.') compiled against [ES2015](https://babeljs.io/docs/en/learn#ecmascript-2015-features 'ECMAScript 2015') for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html 'Node/CJS Modules') for modules
+-   `readdir-cluster/edition-es5/index.js` is [TypeScript](https://www.typescriptlang.org/ 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.') compiled against ES5 for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html 'Node/CJS Modules') for modules
+-   `readdir-cluster/edition-es2017-esm/index.js` is [TypeScript](https://www.typescriptlang.org/ 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.') compiled against [ES2017](https://en.wikipedia.org/wiki/ES2017 'ECMAScript 2017') for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 12 || 14 || 16 || 18 || 20 || 21 with [Import](https://babeljs.io/docs/learn-es2015/#modules 'ECMAScript Modules') for modules
+-   `readdir-cluster/edition-types/index.d.ts` is [TypeScript](https://www.typescriptlang.org/ 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.') compiled Types with [Import](https://babeljs.io/docs/learn-es2015/#modules 'ECMAScript Modules') for modules
 
 <!-- /INSTALL -->
 
@@ -133,7 +142,7 @@ This package is published with the following editions:
 
 #### Contributors
 
--   [Benjamin Lupton](https://github.com/balupton) — [view contributions](https://github.com/bevry/readdir-cluster/commits?author=balupton "View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster")
+-   [Benjamin Lupton](https://github.com/balupton) — [view contributions](https://github.com/bevry/readdir-cluster/commits?author=balupton 'View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster')
 
 ### Finances
 
