@@ -77,7 +77,7 @@ Benchmarks:
 Recommendations:
 
 -   if you target Node.js 18.7 and above, you should use [`fs.readdir`](https://nodejs.org/api/fs.html#fsreaddirpath-options-callback) with `recursive: true`
--   if you target older Node.js versions, you should use [`@bevry/fs-list`](https://github.com/bevry/fs-list) which uses `fs-readdir` if available otherwise uses the `find` executable which is even more performant (60ms instead of 100ms)
+-   if you target older Node.js versions, you should use [`@bevry/fs-list`](https://github.com/bevry/fs-list)
 -   if you target older Node.js versions and you want a stat object, use `readdir-cluster`
 -   if you target Nodejs 12 and above, and want a lot of customisation, use [fdir](https://github.com/thecodrr/fdir)
 
