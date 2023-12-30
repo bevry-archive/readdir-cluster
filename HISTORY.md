@@ -1,5 +1,13 @@
 # History
 
+## v6.0.0 2023 December 30
+
+-   Rewrote in TypeScript and changed API to use promises and accept a single options object
+-   Also improve the reliability by using modern APIs when available (with fallbacks when not available), as well as a customisable retry delay
+-   Added an extremely basic CLI
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Thank you to the sponsors: [Andrew Nesbitt](https://nesbitt.io), [Balsa](https://balsa.com), [Codecov](https://codecov.io), [Poonacha Medappa](https://poonachamedappa.com), [Rob Morris](https://github.com/Rob-Morris), [Sentry](https://sentry.io), [Syntax](https://syntax.fm)
+
 ## v5.3.0 2023 December 6
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

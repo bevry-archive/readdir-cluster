@@ -1,9 +1,8 @@
 <!-- TITLE/ -->
 
-<h1>readdir-cluster</h1>
+# readdir-cluster
 
 <!-- /TITLE -->
-
 
 <!-- BADGES/ -->
 
@@ -25,85 +24,118 @@
 
 <!-- /BADGES -->
 
-
 <!-- DESCRIPTION/ -->
 
-Use multiple CPU cores via clusters for the fastest way to read nested directories and their stats
+Create a cluster of workers to iterate through the filesystem
 
 <!-- /DESCRIPTION -->
 
 
 ## Usage
 
-```javascript
-const readdir = require('readdir-cluster')
-const paths = []
+[Complete API Documentation.](http://master.readdir-cluster.bevry.surge.sh/docs/)
 
-function iterator(fullPath, relativePath, statObject) {
-    if (statObject.directory && relativePath[0] === '.') {
-        return false // do not delve deeper into hidden paths
-    }
-    paths.push(fullPath)
+```typescript
+import readdirCluster, { Stat } from 'readdir-cluster'
+
+// note that Stat is not the same as fs.Stats as it has functions removed, as it needed to be serialisable
+function iterator(path: string, filename: string, stat: Stat) {
+    // skip directories and files that start with .
+    if (filename[0] === '.') return false
+    // do not recurse into directories
+    if (stat.directory) return false
 }
 
-readdir(__dirname, iterator, function (err) {
-    if (err) throw err
-    console.log('completed successfully:', paths)
-})
+const paths = await readdirCluster({ directory: '.', iterator })
+console.log(paths)
 ```
+
+### Performance
+
+-   Running `readdir-cluster .` returns 7388 files in 500ms
+-   Running [`readdir`](https://nodejs.org/api/fs.html#fsreaddirpath-options-callback) with `recursive: true` returns 7388 files in 100ms
+
+    ```javascript
+    import { readdir } from 'fs'
+    readdir('.', { recursive: true }, (err, files) => {
+        if (err) console.error(err)
+        else if (files.length) process.stdout.write(files.join('\n') + '\n')
+    })
+    ```
+
+-   Running [fdir](https://github.com/thecodrr/fdir) returns 6480 files in 100ms
+
+    ```javascript
+    import { fdir } from 'fdir'
+    const api = new fdir().withBasePath().crawl(process.argv[2])
+    api.withPromise().then((files) => {
+        if (files.length) process.stdout.write(files.join('\n') + '\n')
+    })
+    ```
+
+As such, you should probably use `readdir` with `recursive: true` or `fdir` instead. As for why this package exists, readdir-cluster was created in 2005, recursive was added to Node.js in 2023, and fdir was created in 2020. That said, there are [several issues](https://github.com/bevry/readdir-cluster/issues) that could potentially improve readdir-cluster performance.
 
 <!-- INSTALL/ -->
 
-<h2>Install</h2>
+## Install
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
-<ul>
-<li>Install: <code>npm install --save readdir-cluster</code></li>
-<li>Import: <code>import * as pkg from ('readdir-cluster')</code></li>
-<li>Require: <code>const pkg = require('readdir-cluster')</code></li>
-</ul>
+### [npm](https://npmjs.com "npm is a package manager for javascript")
 
-<h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
+#### Install Globally
 
-<p>This package is published with the following editions:</p>
+-   Install: `npm install --global readdir-cluster`
+-   Executable: `readdir-cluster`
 
-<ul><li><code>readdir-cluster</code> aliases <code>readdir-cluster/source/index.js</code></li>
-<li><code>readdir-cluster/source/index.js</code> is <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> source code for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> 4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li></ul>
+#### Install Locally
+
+-   Install: `npm install --save readdir-cluster`
+-   Executable: `npx readdir-cluster`
+-   Import: `import pkg from ('readdir-cluster')`
+-   Require: `const pkg = require('readdir-cluster').default`
+
+### [Editions](https://editions.bevry.me "Editions are the best way to produce and consume packages you care about.")
+
+This package is published with the following editions:
+-   `readdir-cluster` aliases `readdir-cluster/index.cjs` which uses the [Editions Autoloader](https://github.com/bevry/editions "You can use the Editions Autoloader to autoload the appropriate edition for your consumers environment") to automatically select the correct edition for the consumer's environment
+-   `readdir-cluster/source/index.ts` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") source code with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
+-   `readdir-cluster/edition-es2022/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2022](https://en.wikipedia.org/wiki/ES2022 "ECMAScript 2022") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
+-   `readdir-cluster/edition-es2017/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2017](https://en.wikipedia.org/wiki/ES2017 "ECMAScript 2017") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
+-   `readdir-cluster/edition-es2015/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2015](https://babeljs.io/docs/en/learn#ecmascript-2015-features "ECMAScript 2015") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
+-   `readdir-cluster/edition-es5/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against ES5 for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
+-   `readdir-cluster/edition-es2017-esm/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2017](https://en.wikipedia.org/wiki/ES2017 "ECMAScript 2017") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 12 || 14 || 16 || 18 || 20 || 21 with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
+-   `readdir-cluster/edition-types/index.d.ts` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled Types with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
 
 <!-- /INSTALL -->
 
-
 <!-- HISTORY/ -->
 
-<h2>History</h2>
+## History
 
-<a href="https://github.com/bevry/readdir-cluster/blob/master/HISTORY.md#files">Discover the release history by heading on over to the <code>HISTORY.md</code> file.</a>
+[Discover the release history by heading on over to the `HISTORY.md` file.](https://github.com/bevry/readdir-cluster/blob/HEAD/HISTORY.md#files)
 
 <!-- /HISTORY -->
 
-
-<!-- CONTRIBUTE/ -->
-
-<h2>Contribute</h2>
-
-<a href="https://github.com/bevry/readdir-cluster/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
-
-<!-- /CONTRIBUTE -->
-
-
 <!-- BACKERS/ -->
 
-<h2>Backers</h2>
+## Backers
 
-<h3>Maintainers</h3>
+### Code
 
-These amazing people are maintaining this project:
+[Discover how to contribute via the `CONTRIBUTING.md` file.](https://github.com/bevry/readdir-cluster/blob/HEAD/CONTRIBUTING.md#files)
 
-<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/readdir-cluster/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster">view contributions</a></li></ul>
+#### Authors
 
-<h3>Sponsors</h3>
+-   [Benjamin Lupton](https://balupton.com) — Accelerating collaborative wisdom.
 
-No sponsors yet! Will you be the first?
+#### Maintainers
+
+-   [Benjamin Lupton](https://balupton.com) — Accelerating collaborative wisdom.
+
+#### Contributors
+
+-   [Benjamin Lupton](https://github.com/balupton) — [view contributions](https://github.com/bevry/readdir-cluster/commits?author=balupton "View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster")
+
+### Finances
 
 <span class="badge-githubsponsors"><a href="https://github.com/sponsors/balupton" title="Donate to this project using GitHub Sponsors"><img src="https://img.shields.io/badge/github-donate-yellow.svg" alt="GitHub Sponsors donate button" /></a></span>
 <span class="badge-thanksdev"><a href="https://thanks.dev/u/gh/bevry" title="Donate to this project using ThanksDev"><img src="https://img.shields.io/badge/thanksdev-donate-yellow.svg" alt="ThanksDev donate button" /></a></span>
@@ -114,27 +146,56 @@ No sponsors yet! Will you be the first?
 <span class="badge-crypto"><a href="https://bevry.me/crypto" title="Donate to this project using Cryptocurrency"><img src="https://img.shields.io/badge/crypto-donate-yellow.svg" alt="crypto donate button" /></a></span>
 <span class="badge-paypal"><a href="https://bevry.me/paypal" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
 
-<h3>Contributors</h3>
+#### Sponsors
 
-These amazing people have contributed code to this project:
+-   [Andrew Nesbitt](https://nesbitt.io) — Software engineer and researcher
+-   [Balsa](https://balsa.com) — We're Balsa, and we're building tools for builders.
+-   [Codecov](https://codecov.io) — Empower developers with tools to improve code quality and testing.
+-   [Poonacha Medappa](https://poonachamedappa.com)
+-   [Rob Morris](https://github.com/Rob-Morris)
+-   [Sentry](https://sentry.io) — Real-time crash reporting for your web apps, mobile apps, and games.
+-   [Syntax](https://syntax.fm) — Syntax Podcast
 
-<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/readdir-cluster/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/readdir-cluster">view contributions</a></li></ul>
+#### Donors
 
-<a href="https://github.com/bevry/readdir-cluster/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
+-   [Andrew Nesbitt](https://nesbitt.io)
+-   [Armen Mkrtchian](https://mogoni.dev)
+-   [Balsa](https://balsa.com)
+-   [Chad](https://opencollective.com/chad8)
+-   [Codecov](https://codecov.io)
+-   [dr.dimitru](https://veliovgroup.com)
+-   [Elliott Ditman](https://elliottditman.com)
+-   [entroniq](https://gitlab.com/entroniq)
+-   [GitHub](https://github.com/about)
+-   [Hunter Beast](https://cryptoquick.com)
+-   [Jean-Luc Geering](https://github.com/jlgeering)
+-   [Michael Duane Mooring](https://mdm.cc)
+-   [Michael Harry Scepaniak](https://michaelscepaniak.com)
+-   [Mohammed Shah](https://github.com/smashah)
+-   [Mr. Henry](https://mrhenry.be)
+-   [Nermal](https://arjunaditya.vercel.app)
+-   [Pleo](https://pleo.io)
+-   [Poonacha Medappa](https://poonachamedappa.com)
+-   [Rob Morris](https://github.com/Rob-Morris)
+-   [Robert de Forest](https://github.com/rdeforest)
+-   [Sentry](https://sentry.io)
+-   [ServieJS](https://github.com/serviejs)
+-   [Skunk Team](https://skunk.team)
+-   [Syntax](https://syntax.fm)
+-   [WriterJohnBuck](https://github.com/WriterJohnBuck)
 
 <!-- /BACKERS -->
 
-
 <!-- LICENSE/ -->
 
-<h2>License</h2>
+## License
 
 Unless stated otherwise all works are:
 
-<ul><li>Copyright &copy; 2015+ <a href="http://bevry.me">Bevry Pty Ltd</a></li></ul>
+-   Copyright &copy; [Benjamin Lupton](https://balupton.com)
 
 and licensed under:
 
-<ul><li><a href="http://spdx.org/licenses/Artistic-2.0.html">Artistic License 2.0</a></li></ul>
+-   [Artistic License 2.0](http://spdx.org/licenses/Artistic-2.0.html)
 
 <!-- /LICENSE -->

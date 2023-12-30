@@ -1,14 +1,26 @@
 {
   "title": "readdir-cluster",
   "name": "readdir-cluster",
-  "version": "5.3.0",
-  "description": "Use multiple CPU cores via clusters for the fastest way to read nested directories and their stats",
-  "homepage": "https://github.com/bevry/readdir-cluster",
+  "version": "6.0.0",
   "license": "Artistic-2.0",
+  "description": "Create a cluster of workers to iterate through the filesystem",
+  "homepage": "https://github.com/bevry/readdir-cluster",
+  "funding": "https://bevry.me/fund",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bevry/readdir-cluster.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bevry/readdir-cluster/issues"
+  },
   "keywords": [
     "cluster",
     "directory",
-    "esnext",
+    "es2015",
+    "es2017",
+    "es2022",
+    "es5",
+    "export-default",
     "folder",
     "fs",
     "nested",
@@ -17,6 +29,9 @@
     "recursive",
     "scan",
     "tree",
+    "typed",
+    "types",
+    "typescript",
     "watch",
     "watching",
     "watchman"
@@ -60,61 +75,201 @@
       "npmPackageName": "readdir-cluster"
     }
   },
-  "funding": "https://bevry.me/fund",
-  "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+  "author": "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)",
+  "authors": [
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton): Accelerating collaborative wisdom."
+  ],
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton): Accelerating collaborative wisdom."
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)"
   ],
-  "bugs": {
-    "url": "https://github.com/bevry/readdir-cluster/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bevry/readdir-cluster.git"
-  },
+  "sponsors": [
+    "Andrew Nesbitt (https://nesbitt.io) (https://github.com/andrew): Software engineer and researcher",
+    "Balsa <hello@balsa.com> (https://balsa.com) (https://github.com/balsa): We're Balsa, and we're building tools for builders.",
+    "Codecov <hello-codecov@sentry.io> (https://codecov.io) (https://github.com/codecov): Empower developers with tools to improve code quality and testing.",
+    "Poonacha Medappa (https://poonachamedappa.com) (https://github.com/km-Poonacha)",
+    "Rob Morris <rob@prismatik.com.au> (https://github.com/Rob-Morris)",
+    "Sentry (https://sentry.io) (https://github.com/getsentry): Real-time crash reporting for your web apps, mobile apps, and games.",
+    "Syntax <scott@syntax.fm> (https://syntax.fm) (https://github.com/syntaxfm): Syntax Podcast"
+  ],
+  "donors": [
+    "Andrew Nesbitt (https://nesbitt.io) (https://github.com/andrew)",
+    "Armen Mkrtchian (https://mogoni.dev) (https://github.com/Armenm)",
+    "Balsa <hello@balsa.com> (https://balsa.com) (https://github.com/balsa)",
+    "Chad (https://opencollective.com/chad8)",
+    "Codecov <hello-codecov@sentry.io> (https://codecov.io) (https://github.com/codecov)",
+    "dr.dimitru (https://veliovgroup.com) (https://github.com/dr-dimitru)",
+    "Elliott Ditman (https://elliottditman.com) (https://github.com/elliottditman)",
+    "entroniq (https://gitlab.com/entroniq) (https://thanks.dev/d/gl/entroniq)",
+    "GitHub (https://github.com/about) (https://github.com/github)",
+    "Hunter Beast (https://cryptoquick.com) (https://github.com/cryptoquick)",
+    "Jean-Luc Geering (https://github.com/jlgeering) (https://opencollective.com/jlgeering) (https://twitter.com/jlgeering)",
+    "Michael Duane Mooring (https://mdm.cc) (https://github.com/mikeumus) (https://opencollective.com/mikeumus) (https://twitter.com/mikeumus)",
+    "Michael Harry Scepaniak <mhs1.sys@gmail.com> (https://michaelscepaniak.com) (https://github.com/hispanic)",
+    "Mohammed Shah <shah@idk.uno> (https://github.com/smashah) (https://thanks.dev/d/gh/smashah) (https://twitter.com/smashah)",
+    "Mr. Henry <hello@mrhenry.be> (https://mrhenry.be) (https://github.com/mrhenry)",
+    "Nermal <nermalcat69@skiff.com> (https://arjunaditya.vercel.app) (https://github.com/nermalcat69)",
+    "Pleo (https://pleo.io) (https://github.com/pleo-io)",
+    "Poonacha Medappa (https://poonachamedappa.com) (https://github.com/km-Poonacha)",
+    "Rob Morris <rob@prismatik.com.au> (https://github.com/Rob-Morris)",
+    "Robert de Forest <guitar.robot@gmail.com> (https://github.com/rdeforest)",
+    "Sentry (https://sentry.io) (https://github.com/getsentry)",
+    "ServieJS (https://github.com/serviejs) (https://thanks.dev/d/gh/serviejs)",
+    "Skunk Team (https://skunk.team) (https://github.com/skunkteam)",
+    "Syntax <scott@syntax.fm> (https://syntax.fm) (https://github.com/syntaxfm)",
+    "WriterJohnBuck (https://github.com/WriterJohnBuck)"
+  ],
   "engines": {
     "node": ">=4"
   },
   "editions": [
     {
-      "description": "ESNext source code for Node.js 4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "description": "TypeScript source code with Import for modules",
       "directory": "source",
-      "entry": "index.js",
+      "entry": "index.ts",
       "tags": [
         "source",
+        "typescript",
+        "import"
+      ],
+      "engines": false
+    },
+    {
+      "description": "TypeScript compiled against ES2022 for Node.js 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "directory": "edition-es2022",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
         "javascript",
-        "esnext",
+        "es2022",
         "require"
       ],
       "engines": {
-        "node": "4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21"
+        "node": "14 || 16 || 18 || 20 || 21",
+        "browsers": false
       }
+    },
+    {
+      "description": "TypeScript compiled against ES2017 for Node.js 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "directory": "edition-es2017",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es2017",
+        "require"
+      ],
+      "engines": {
+        "node": "8 || 10 || 12 || 14 || 16 || 18 || 20 || 21",
+        "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled against ES2015 for Node.js 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "directory": "edition-es2015",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es2015",
+        "require"
+      ],
+      "engines": {
+        "node": "6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21",
+        "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled against ES5 for Node.js 4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21 with Require for modules",
+      "directory": "edition-es5",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es5",
+        "require"
+      ],
+      "engines": {
+        "node": "4 || 6 || 8 || 10 || 12 || 14 || 16 || 18 || 20 || 21",
+        "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled against ES2017 for Node.js 12 || 14 || 16 || 18 || 20 || 21 with Import for modules",
+      "directory": "edition-es2017-esm",
+      "entry": "index.js",
+      "tags": [
+        "compiled",
+        "javascript",
+        "es2017",
+        "import"
+      ],
+      "engines": {
+        "node": "12 || 14 || 16 || 18 || 20 || 21",
+        "browsers": false
+      }
+    },
+    {
+      "description": "TypeScript compiled Types with Import for modules",
+      "directory": "edition-types",
+      "entry": "index.d.ts",
+      "tags": [
+        "compiled",
+        "types",
+        "import"
+      ],
+      "engines": false
     }
   ],
-  "type": "commonjs",
-  "main": "source/index.js",
+  "bin": "bin.cjs",
+  "types": "edition-types/index.d.ts",
+  "type": "module",
+  "main": "index.cjs",
+  "exports": {
+    "node": {
+      "types": "./edition-types/index.d.ts",
+      "import": "./edition-es2017-esm/index.js",
+      "default": "./index.cjs",
+      "require": "./edition-es2022/index.js"
+    }
+  },
+  "dependencies": {
+    "editions": "^6.21.0"
+  },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.23.0",
-    "assert-helpers": "^11.9.0",
-    "eslint": "^8.55.0",
-    "eslint-config-bevry": "^5.2.0",
+    "@types/node": "^20.10.6",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "assert-helpers": "^11.12.0",
+    "eslint": "^8.56.0",
+    "eslint-config-bevry": "^5.4.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "kava": "^7.5.0",
-    "prettier": "^3.1.0",
-    "projectz": "^3.4.0",
-    "valid-directory": "^4.6.0"
+    "eslint-plugin-prettier": "^5.1.2",
+    "filedirname": "^3.4.0",
+    "kava": "^7.8.0",
+    "prettier": "^3.1.1",
+    "projectz": "^4.2.0",
+    "typedoc": "^0.25.4",
+    "typescript": "5.3.3",
+    "valid-directory": "^4.9.0"
   },
   "scripts": {
+    "our:bin": "node ./bin.cjs",
     "our:clean": "rm -rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "printf '%s\n' 'no need for this project'",
+    "our:compile": "npm run our:compile:edition-es2015 && npm run our:compile:edition-es2017 && npm run our:compile:edition-es2017-esm && npm run our:compile:edition-es2022 && npm run our:compile:edition-es5 && npm run our:compile:edition-types",
+    "our:compile:edition-es2015": "tsc --module commonjs --target ES2015 --outDir ./edition-es2015 --project tsconfig.json && ( test ! -d edition-es2015/source || ( mv edition-es2015/source edition-temp && rm -rf edition-es2015 && mv edition-temp edition-es2015 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2015/package.json",
+    "our:compile:edition-es2017": "tsc --module commonjs --target ES2017 --outDir ./edition-es2017 --project tsconfig.json && ( test ! -d edition-es2017/source || ( mv edition-es2017/source edition-temp && rm -rf edition-es2017 && mv edition-temp edition-es2017 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2017/package.json",
+    "our:compile:edition-es2017-esm": "tsc --module ESNext --target ES2017 --outDir ./edition-es2017-esm --project tsconfig.json && ( test ! -d edition-es2017-esm/source || ( mv edition-es2017-esm/source edition-temp && rm -rf edition-es2017-esm && mv edition-temp edition-es2017-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2017-esm/package.json",
+    "our:compile:edition-es2022": "tsc --module commonjs --target ES2022 --outDir ./edition-es2022 --project tsconfig.json && ( test ! -d edition-es2022/source || ( mv edition-es2022/source edition-temp && rm -rf edition-es2022 && mv edition-temp edition-es2022 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2022/package.json",
+    "our:compile:edition-es5": "tsc --module commonjs --target ES5 --outDir ./edition-es5 --project tsconfig.json && ( test ! -d edition-es5/source || ( mv edition-es5/source edition-temp && rm -rf edition-es5 && mv edition-temp edition-es5 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es5/package.json",
+    "our:compile:edition-types": "tsc --emitDeclarationOnly --declaration --declarationMap --declarationDir ./edition-types --project tsconfig.json && ( test ! -d edition-types/source || ( mv edition-types/source edition-temp && rm -rf edition-types && mv edition-temp edition-types ) )",
     "our:deploy": "printf '%s\n' 'no need for this project'",
-    "our:meta": "npm run our:meta:contributors && npm run our:meta:projectz",
-    "our:meta:contributors": "update-contributors",
-    "our:meta:projectz": "projectz compile",
+    "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
+    "our:meta:docs": "npm run our:meta:docs:typedoc",
+    "our:meta:docs:typedoc": "rm -rf ./docs && typedoc --exclude '**/+(*test*|node_modules)' --excludeExternals --out ./docs ./source",
+    "our:meta:projectz": "projectz --offline",
     "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
     "our:release:check-changelog": "cat ./HISTORY.md | grep \"v$npm_package_version\" || (printf '%s\n' \"add a changelog entry for v$npm_package_version\" && exit -1)",
     "our:release:check-dirty": "git diff --exit-code",
@@ -124,11 +279,10 @@
     "our:setup": "npm run our:setup:install",
     "our:setup:install": "npm install",
     "our:test": "npm run our:verify && npm test",
-    "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:prettier",
-    "our:verify:directory": "valid-directory",
+    "our:verify": "npm run our:verify:eslint && npm run our:verify:prettier",
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:prettier": "prettier --write .",
-    "test": "node ./source/test.js"
+    "test": "node ./test.cjs"
   },
   "eslintConfig": {
     "extends": [
@@ -138,7 +292,7 @@
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "trailingComma": "all",
+    "trailingComma": "es5",
     "endOfLine": "lf"
   }
 }
